@@ -2,4 +2,8 @@ cache
 cache-downloads
 inspector
 api
-source/inspector.html
+isource/inspector.html
+
+.DS_Store
+.idea/
+curvature/__pycache__/

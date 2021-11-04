@@ -29,20 +29,24 @@ def main():
     # TODO metric or imperial?
     is_metric = True
 
-    radius_m = IUGG_MEAN_RADIUS_M
+    radius_m = EQUATORIAL_RADIUS_M
     height_observer_m = SIX_FOOT_OBSERVER_M / 3
-    total_distance_m = METERS_PER_MILE * 5.95
+    print('mi\tft\tm')
+    for tenths in range(40, 101, 1):
+        total_distance_m = METERS_PER_MILE * tenths/10
+        ft, meters = _print_hh(height_observer_m, radius_m, total_distance_m)
+        print(f"{tenths/10}\t{ft}\t{meters}")
 
-    hidden_height_m = calc_hidden_height(h0=height_observer_m, s=total_distance_m, r=radius_m)
-    hidden_height_f = hidden_height_m * FEET_PER_METER
 
-    print(f"Sphere radius (r) \n{radius_m:,}m\n\n"
-          f"Observer height (h_0) \n{height_observer_m:,}m\n\n"
-          f"Observer-to-target distance (s) \n{total_distance_m:,}m\n")
-
-    print(f"Target hidden height\n"
-          f"{round(hidden_height_m, 3):,}m \t{hidden_height_m:,}m\n"
-          f"{round(hidden_height_f, 3):,}ft \t{hidden_height_f:,}ft")
+def _print_hh(height_observer_m, radius_m, total_distance_m, full_figures=False):
+    hh_meters = calc_hidden_height(h0=height_observer_m, s=total_distance_m, r=radius_m)
+    hh_feet = hh_meters * FEET_PER_METER
+    # print(f"Sphere radius (r) \n{radius_m:,}m\n\n"
+    #       f"Observer height (h_0) \n{height_observer_m:,}m\n\n"
+    #       f"Observer-to-target distance (s) \n{total_distance_m:,}m\n")
+    f_str = f"{hh_feet:,}" if full_figures else f"{round(hh_feet, 3):,}"
+    m_str = f"{hh_meters:,}" if full_figures else f"{round(hh_meters, 3):,}"
+    return f_str, m_str
 
 
 # testing the correctness of the formula...

@@ -34,5 +34,13 @@ def puget_distance():
     print(f"{dist_m/1609.34} miles")
 
 
+def shorter_try():
+    a = [47.576371, -122.420880] # alki point lighthouse
+    b = [47.661856, -122.435826]  # near west point lighthouse
+    b = [47.638603, -122.412524]  # mcgraw shoreline street
+    dist_m = calc_haversine_distance(a, b)
+    print(f"{dist_m/1609.34} miles")
+
+
 if __name__ == "__main__":
-    puget_distance()
+    shorter_try()
